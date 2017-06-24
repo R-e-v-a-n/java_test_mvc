@@ -26,23 +26,24 @@
 <body>
 
 <div class="container">
+    <form:form method="POST" modelAttribute="loginForm" class="form-login">
+        <h2 class="form-login-heading">Log in</h2>
+        <spring:bind path="username">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:errors path="username"/>
+                <form:input type="text" path="username" class="form-control" placeholder="Username"
+                            autofocus="true"/>
+            </div>
+        </spring:bind>
 
-    <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
+        <spring:bind path="password">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="password" path="password" class="form-control" placeholder="Password"/>
+            </div>
+        </spring:bind>
 
-        <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
-                   autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
-            <span>${error}</span>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
-        </div>
-
-    </form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form:form>
 
 </div>
 <!-- /container -->

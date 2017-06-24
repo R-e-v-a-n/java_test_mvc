@@ -41,6 +41,11 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public Boolean autoLogin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+        if(userDetails == null){
+            return false;
+        }
+
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
@@ -53,5 +58,10 @@ public class SecurityServiceImpl implements SecurityService {
         }
 
         return authenticationToken.isAuthenticated();
+    }
+
+    @Override
+    public void logout() {
+        SecurityContextHolder.getContext().setAuthentication(null);
     }
 }

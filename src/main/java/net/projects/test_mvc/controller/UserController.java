@@ -50,25 +50,37 @@ public class UserController {
 
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
 
-        return "redirect:/welcome";
+        return "redirect:/profile";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null) {
-            model.addAttribute("error", "Username or password is incorrect.");
-        }
-
-        if (logout != null) {
-            model.addAttribute("message", "Logged out successfully.");
-        }
+    public String login(Model model) {
+        model.addAttribute("loginForm", new User());
 
         return "login";
     }
 
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute("loginForm") User loginForm, BindingResult bindingResult, Model model){
+
+        if(securityService.autoLogin(loginForm.getUsername(), loginForm.getPassword())){
+            return "redirect:/profile";
+        }
+
+        bindingResult.rejectValue("username", "Incorrect.loginForm");
+        //model.addAttribute("error","Username or password is incorrect.");
+        return "login";
+    }
+
+    @RequestMapping(value = "logout")
+    public String logout(Model model){
+        securityService.logout();
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = {"/", "/profile"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-        return "welcome";
+        return "profile";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)

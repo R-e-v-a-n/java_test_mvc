@@ -12,4 +12,6 @@ public interface SecurityService {
     String findLoggedInUsername();
 
     Boolean autoLogin(String username, String password);
+
+    void logout();
 }

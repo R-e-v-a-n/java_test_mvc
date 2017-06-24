@@ -7,12 +7,12 @@
         </encoder>
     </appender>
 
-    <logger name="net.proselyte.springsecurityapp">
+    <logger name="net.projects.test_mvc">
         <level value="debug"/>
     </logger>
 
     <logger name="org.springframework">
-        <level value="info"/>
+        <level value="error"/>
     </logger>
 
     <root>
