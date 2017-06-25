@@ -49,12 +49,20 @@
     <index id="13" parent="5" name="role_id">
       <ColNames>role_id</ColNames>
     </index>
-    <key id="14" parent="5" name="PRIMARY">
+    <index id="14" parent="5" name="username">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="15" parent="5" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="15" parent="5" name="users_ibfk_1">
+    <key id="16" parent="5" name="username">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>username</UnderlyingIndexName>
+    </key>
+    <foreign-key id="17" parent="5" name="users_ibfk_1">
       <ColNames>role_id</ColNames>
       <RefSchemaName>java_test_mvc</RefSchemaName>
       <RefTableName>roles</RefTableName>
